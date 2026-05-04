@@ -27,9 +27,38 @@ class DosenController extends Controller
 
         Dosen::create([
             'nidn' => $request->nidn,
-            'nama' => $request->nama,
+            'nama' => $request->nama
         ]);
 
-        return redirect()->route('dosen.index')->with('success', 'Data dosen berhasil ditambah');
+        return redirect()->route('dosen.index')->with('success', 'Data dosen berhasil ditambahkan');
+    }
+
+    public function show($nidn)
+    {
+        $dosen = Dosen::where('nidn', $nidn)->firstOrFail();
+        return view('dosen.show', compact('dosen'));
+    }
+
+    public function edit($nidn)
+    {
+        $dosen = Dosen::where('nidn', $nidn)->firstOrFail();
+        return view('dosen.edit', compact('dosen'));
+    }
+
+    public function update(Request $request, $nidn)
+    {
+        $request->validate([
+            'nidn' => 'required',
+            'nama' => 'required'
+        ]);
+
+        $dosen = Dosen::where('nidn', $nidn)->firstOrFail();
+
+        $dosen->update([
+            'nidn' => $request->nidn,
+            'nama' => $request->nama
+        ]);
+
+        return redirect()->route('dosen.index')->with('success', 'Data dosen berhasil diupdate');
     }
 }

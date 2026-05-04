@@ -29,9 +29,40 @@ class MahasiswaController extends Controller
         Mahasiswa::create([
             'npm' => $request->npm,
             'nidn' => $request->nidn,
-            'nama' => $request->nama,
+            'nama' => $request->nama
         ]);
 
-        return redirect()->route('mahasiswa.index')->with('success', 'Data mahasiswa berhasil ditambah');
+        return redirect()->route('mahasiswa.index')->with('success', 'Data mahasiswa berhasil ditambahkan');
+    }
+
+    public function show($npm)
+    {
+        $mahasiswa = Mahasiswa::where('npm', $npm)->firstOrFail();
+        return view('mahasiswa.show', compact('mahasiswa'));
+    }
+
+    public function edit($npm)
+    {
+        $mahasiswa = Mahasiswa::where('npm', $npm)->firstOrFail();
+        return view('mahasiswa.edit', compact('mahasiswa'));
+    }
+
+    public function update(Request $request, $npm)
+    {
+        $request->validate([
+            'npm' => 'required',
+            'nidn' => 'required',
+            'nama' => 'required'
+        ]);
+
+        $mahasiswa = Mahasiswa::where('npm', $npm)->firstOrFail();
+
+        $mahasiswa->update([
+            'npm' => $request->npm,
+            'nidn' => $request->nidn,
+            'nama' => $request->nama
+        ]);
+
+        return redirect()->route('mahasiswa.index')->with('success', 'Data mahasiswa berhasil diupdate');
     }
 }

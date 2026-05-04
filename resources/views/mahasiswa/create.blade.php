@@ -1,20 +1,27 @@
 @extends('layouts.app')
 
 @section('content')
-<h2>Tambah Mahasiswa</h2>
+<h2 class="fw-bold">Tambah Mahasiswa</h2>
 
 <form action="{{ route('mahasiswa.store') }}" method="POST">
     @csrf
 
-    <label>NPM</label><br>
-    <input type="text" name="npm"><br><br>
+    <div class="mb-3">
+        <label class="form-label">NPM</label>
+        <input type="text" name="npm" class="form-control">
+    </div>
 
-    <label>NIDN (Dosen Wali)</label><br>
-    <input type="text" name="nidn"><br><br>
+    <div class="mb-3">
+        <label class="form-label">NIDN</label>
+        <input type="text" name="nidn" class="form-control">
+    </div>
 
-    <label>Nama</label><br>
-    <input type="text" name="nama"><br><br>
+    <div class="mb-3">
+        <label class="form-label">Nama</label>
+        <input type="text" name="nama" class="form-control">
+    </div>
 
-    <button type="submit">Simpan</button>
+    <button type="submit" class="btn btn-success">Simpan</button>
+    <a href="{{ route('mahasiswa.index') }}" class="btn btn-secondary">Kembali</a>
 </form>
 @endsection

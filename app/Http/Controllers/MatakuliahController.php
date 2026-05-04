@@ -29,9 +29,40 @@ class MatakuliahController extends Controller
         Matakuliah::create([
             'kode_matakuliah' => $request->kode_matakuliah,
             'nama_matakuliah' => $request->nama_matakuliah,
-            'sks' => $request->sks,
+            'sks' => $request->sks
         ]);
 
-        return redirect()->route('matakuliah.index')->with('success', 'Data matakuliah berhasil ditambah');
+        return redirect()->route('matakuliah.index')->with('success', 'Data matakuliah berhasil ditambahkan');
+    }
+
+    public function show($kode_matakuliah)
+    {
+        $matakuliah = Matakuliah::where('kode_matakuliah', $kode_matakuliah)->firstOrFail();
+        return view('matakuliah.show', compact('matakuliah'));
+    }
+
+    public function edit($kode_matakuliah)
+    {
+        $matakuliah = Matakuliah::where('kode_matakuliah', $kode_matakuliah)->firstOrFail();
+        return view('matakuliah.edit', compact('matakuliah'));
+    }
+
+    public function update(Request $request, $kode_matakuliah)
+    {
+        $request->validate([
+            'kode_matakuliah' => 'required',
+            'nama_matakuliah' => 'required',
+            'sks' => 'required|numeric'
+        ]);
+
+        $matakuliah = Matakuliah::where('kode_matakuliah', $kode_matakuliah)->firstOrFail();
+
+        $matakuliah->update([
+            'kode_matakuliah' => $request->kode_matakuliah,
+            'nama_matakuliah' => $request->nama_matakuliah,
+            'sks' => $request->sks
+        ]);
+
+        return redirect()->route('matakuliah.index')->with('success', 'Data matakuliah berhasil diupdate');
     }
 }

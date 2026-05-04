@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Krs;
-use App\Models\Mahasiswa;
-use App\Models\Matakuliah;
 use Illuminate\Http\Request;
 
 class KrsController extends Controller
@@ -17,10 +15,7 @@ class KrsController extends Controller
 
     public function create()
     {
-        $mahasiswa = Mahasiswa::all();
-        $matakuliah = Matakuliah::all();
-
-        return view('krs.create', compact('mahasiswa', 'matakuliah'));
+        return view('krs.create');
     }
 
     public function store(Request $request)
@@ -32,9 +27,38 @@ class KrsController extends Controller
 
         Krs::create([
             'npm' => $request->npm,
-            'kode_matakuliah' => $request->kode_matakuliah,
+            'kode_matakuliah' => $request->kode_matakuliah
         ]);
 
-        return redirect()->route('krs.index')->with('success', 'KRS berhasil ditambah');
+        return redirect()->route('krs.index')->with('success', 'Data KRS berhasil ditambahkan');
+    }
+
+    public function show($id)
+    {
+        $krs = Krs::findOrFail($id);
+        return view('krs.show', compact('krs'));
+    }
+
+    public function edit($id)
+    {
+        $krs = Krs::findOrFail($id);
+        return view('krs.edit', compact('krs'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'npm' => 'required',
+            'kode_matakuliah' => 'required'
+        ]);
+
+        $krs = Krs::findOrFail($id);
+
+        $krs->update([
+            'npm' => $request->npm,
+            'kode_matakuliah' => $request->kode_matakuliah
+        ]);
+
+        return redirect()->route('krs.index')->with('success', 'Data KRS berhasil diupdate');
     }
 }

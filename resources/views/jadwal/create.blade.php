@@ -1,38 +1,37 @@
 @extends('layouts.app')
 
 @section('content')
-<h2>Tambah Jadwal</h2>
+<h2 class="fw-bold">Tambah Jadwal</h2>
 
 <form action="{{ route('jadwal.store') }}" method="POST">
     @csrf
 
-    <label>Matakuliah</label><br>
-    <select name="kode_matakuliah">
-        @foreach($matakuliah as $mk)
-            <option value="{{ $mk->kode_matakuliah }}">
-                {{ $mk->kode_matakuliah }} - {{ $mk->nama_matakuliah }}
-            </option>
-        @endforeach
-    </select><br><br>
+    <div class="mb-3">
+        <label class="form-label">Kode Matakuliah</label>
+        <input type="text" name="kode_matakuliah" class="form-control">
+    </div>
 
-    <label>Dosen</label><br>
-    <select name="nidn">
-        @foreach($dosen as $d)
-            <option value="{{ $d->nidn }}">
-                {{ $d->nidn }} - {{ $d->nama }}
-            </option>
-        @endforeach
-    </select><br><br>
+    <div class="mb-3">
+        <label class="form-label">NIDN</label>
+        <input type="text" name="nidn" class="form-control">
+    </div>
 
-    <label>Kelas</label><br>
-    <input type="text" name="kelas"><br><br>
+    <div class="mb-3">
+        <label class="form-label">Kelas</label>
+        <input type="text" name="kelas" class="form-control">
+    </div>
 
-    <label>Hari</label><br>
-    <input type="text" name="hari"><br><br>
+    <div class="mb-3">
+        <label class="form-label">Hari</label>
+        <input type="text" name="hari" class="form-control">
+    </div>
 
-    <label>Jam</label><br>
-    <input type="time" name="jam"><br><br>
+    <div class="mb-3">
+        <label class="form-label">Jam</label>
+        <input type="time" name="jam" class="form-control">
+    </div>
 
-    <button type="submit">Simpan</button>
+    <button type="submit" class="btn btn-success">Simpan</button>
+    <a href="{{ route('jadwal.index') }}" class="btn btn-secondary">Kembali</a>
 </form>
 @endsection

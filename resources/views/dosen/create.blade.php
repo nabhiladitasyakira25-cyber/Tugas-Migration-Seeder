@@ -1,17 +1,22 @@
 @extends('layouts.app')
 
 @section('content')
-<h2>Tambah Dosen</h2>
+<h2 class="fw-bold">Tambah Dosen</h2>
 
 <form action="{{ route('dosen.store') }}" method="POST">
     @csrf
 
-    <label>NIDN</label><br>
-    <input type="text" name="nidn"><br><br>
+    <div class="mb-3">
+        <label class="form-label">NIDN</label>
+        <input type="text" name="nidn" class="form-control">
+    </div>
 
-    <label>Nama</label><br>
-    <input type="text" name="nama"><br><br>
+    <div class="mb-3">
+        <label class="form-label">Nama</label>
+        <input type="text" name="nama" class="form-control">
+    </div>
 
-    <button type="submit">Simpan</button>
+    <button type="submit" class="btn btn-success">Simpan</button>
+    <a href="{{ route('dosen.index') }}" class="btn btn-secondary">Kembali</a>
 </form>
 @endsection

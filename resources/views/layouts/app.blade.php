@@ -5,137 +5,82 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistem Akademik</title>
 
+    <!-- Bootstrap CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
     <style>
         body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background: #f4f6f9;
-
+            background: #f5f6fa;
             display: flex;
             flex-direction: column;
             min-height: 100vh;
         }
 
-        header {
-            background: #2c3e50;
-            color: white;
-            padding: 15px 30px;
+        /* NAVBAR */
+        .navbar-custom {
+            background: linear-gradient(to right, #2c3e50, #34495e);
+            box-shadow: 0px 3px 8px rgba(0,0,0,0.3);
         }
 
-        header h1 {
-            margin: 0;
-            font-size: 24px;
-        }
-
-        nav {
-            background: #34495e;
-            padding: 10px 30px;
-            display: flex;
-            justify-content: flex-end;
-            gap: 10px;
-        }
-
-        nav a {
-            text-decoration: none;
-            padding: 10px 15px;
-            background: #1abc9c;
-            border-radius: 8px;
-            color: white;
+        .navbar-custom .navbar-brand {
             font-weight: bold;
-            transition: 0.3s;
-        }
-
-        nav a:hover {
-            background: #16a085;
-        }
-
-        .container {
-            padding: 30px;
-            flex: 1; 
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 15px;
-            background: white;
-        }
-
-        table th {
-            background: #1abc9c;
+            font-size: 20px;
             color: white;
-            padding: 12px;
         }
 
-        table td {
-            border: 1px solid #ddd;
-            padding: 12px;
+        .navbar-custom .nav-link {
+            color: white !important;
+            font-weight: 600;
+            margin-left: 10px;
         }
 
-        button {
-            padding: 10px 18px;
-            background: #3498db;
-            color: white;
-            border: none;
-            cursor: pointer;
-            border-radius: 8px;
+        .navbar-custom .nav-link:hover {
+            color: #1abc9c !important;
         }
 
-        button:hover {
-            background: #2980b9;
+        /* CONTENT */
+        .content {
+            flex: 1;
+            padding-bottom: 30px;
         }
 
-        input, select {
-            width: 100%;
-            padding: 10px;
-            margin-top: 5px;
-            border-radius: 6px;
-            border: 1px solid #ccc;
-        }
-
-        .alert-success {
-            background: #d4edda;
-            padding: 12px;
-            border-radius: 8px;
-            margin-bottom: 15px;
-            color: #155724;
-        }
-
+        /* FOOTER */
         footer {
-            background: #2c3e50;
+            background: linear-gradient(to right, #2c3e50, #34495e);
             color: white;
+            padding: 15px;
             text-align: center;
-            padding: 15px;   
-            font-size: 15px;
-            margin-top: 20px;
-        }
-
-        footer p {
-            margin: 0;
+            font-size: 14px;
+            box-shadow: 0px -3px 8px rgba(0,0,0,0.3);
         }
     </style>
 </head>
 
 <body>
 
-    <header>
-        <h1>Sistem Akademik</h1>
-    </header>
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom px-4">
+        <a class="navbar-brand" href="/">Sistem Akademik</a>
 
-    <nav>
-        <a href="/">Menu</a>
-        <a href="/dosen">Dosen</a>
-        <a href="/mahasiswa">Mahasiswa</a>
-        <a href="/matakuliah">Matakuliah</a>
-        <a href="/jadwal">Jadwal</a>
-        <a href="/krs">KRS</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="/">Beranda</a></li>
+                <li class="nav-item"><a class="nav-link" href="/dosen">Dosen</a></li>
+                <li class="nav-item"><a class="nav-link" href="/mahasiswa">Mahasiswa</a></li>
+                <li class="nav-item"><a class="nav-link" href="/matakuliah">Matakuliah</a></li>
+                <li class="nav-item"><a class="nav-link" href="/jadwal">Jadwal</a></li>
+                <li class="nav-item"><a class="nav-link" href="/krs">KRS</a></li>
+            </ul>
+        </div>
     </nav>
 
-    <div class="container">
+    <div class="container mt-4 content">
 
         @if(session('success'))
-            <div class="alert-success">
+            <div class="alert alert-success">
                 {{ session('success') }}
             </div>
         @endif
@@ -145,8 +90,10 @@
     </div>
 
     <footer>
-        <p>&copy; {{ date('Y') }} Sistem Akademik | Dibuat oleh Nabila</p>
+        &copy; {{ date('Y') }} Sistem Akademik 
     </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>

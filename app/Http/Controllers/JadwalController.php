@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Jadwal;
-use App\Models\Dosen;
-use App\Models\Matakuliah;
 use Illuminate\Http\Request;
 
 class JadwalController extends Controller
@@ -17,10 +15,7 @@ class JadwalController extends Controller
 
     public function create()
     {
-        $dosen = Dosen::all();
-        $matakuliah = Matakuliah::all();
-
-        return view('jadwal.create', compact('dosen', 'matakuliah'));
+        return view('jadwal.create');
     }
 
     public function store(Request $request)
@@ -38,9 +33,44 @@ class JadwalController extends Controller
             'nidn' => $request->nidn,
             'kelas' => $request->kelas,
             'hari' => $request->hari,
-            'jam' => $request->jam,
+            'jam' => $request->jam
         ]);
 
-        return redirect()->route('jadwal.index')->with('success', 'Jadwal berhasil ditambah');
+        return redirect()->route('jadwal.index')->with('success', 'Data jadwal berhasil ditambahkan');
+    }
+
+    public function show($id)
+    {
+        $jadwal = Jadwal::findOrFail($id);
+        return view('jadwal.show', compact('jadwal'));
+    }
+
+    public function edit($id)
+    {
+        $jadwal = Jadwal::findOrFail($id);
+        return view('jadwal.edit', compact('jadwal'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'kode_matakuliah' => 'required',
+            'nidn' => 'required',
+            'kelas' => 'required',
+            'hari' => 'required',
+            'jam' => 'required'
+        ]);
+
+        $jadwal = Jadwal::findOrFail($id);
+
+        $jadwal->update([
+            'kode_matakuliah' => $request->kode_matakuliah,
+            'nidn' => $request->nidn,
+            'kelas' => $request->kelas,
+            'hari' => $request->hari,
+            'jam' => $request->jam
+        ]);
+
+        return redirect()->route('jadwal.index')->with('success', 'Data jadwal berhasil diupdate');
     }
 }
