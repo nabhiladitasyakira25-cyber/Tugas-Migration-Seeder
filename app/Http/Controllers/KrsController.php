@@ -61,4 +61,12 @@ class KrsController extends Controller
 
         return redirect()->route('krs.index')->with('success', 'Data KRS berhasil diupdate');
     }
+
+    public function destroy($id)
+    {
+        $krs = Krs::findOrFail($id);
+        $krs->delete();
+
+        return redirect()->route('krs.index')->with('success', 'Data KRS berhasil dihapus');
+    }
 }

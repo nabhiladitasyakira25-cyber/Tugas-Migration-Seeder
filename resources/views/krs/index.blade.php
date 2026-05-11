@@ -11,7 +11,7 @@
             <th>No</th>
             <th>NPM</th>
             <th>Kode Matakuliah</th>
-            <th width="200px">Aksi</th>
+            <th width="250px">Aksi</th>
         </tr>
     </thead>
     <tbody>
@@ -23,6 +23,15 @@
             <td>
                 <a href="{{ route('krs.show', $k->id) }}" class="btn btn-info btn-sm">Detail</a>
                 <a href="{{ route('krs.edit', $k->id) }}" class="btn btn-warning btn-sm">Edit</a>
+
+                <form action="{{ route('krs.destroy', $k->id) }}" method="POST" style="display:inline;">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger btn-sm"
+                        onclick="return confirm('Yakin mau hapus data ini?')">
+                        Hapus
+                    </button>
+                </form>
             </td>
         </tr>
         @endforeach

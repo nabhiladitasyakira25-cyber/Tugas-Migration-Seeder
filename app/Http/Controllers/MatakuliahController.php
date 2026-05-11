@@ -65,4 +65,12 @@ class MatakuliahController extends Controller
 
         return redirect()->route('matakuliah.index')->with('success', 'Data matakuliah berhasil diupdate');
     }
+
+    public function destroy($kode_matakuliah)
+    {
+        $matakuliah = Matakuliah::where('kode_matakuliah', $kode_matakuliah)->firstOrFail();
+        $matakuliah->delete();
+
+        return redirect()->route('matakuliah.index')->with('success', 'Data matakuliah berhasil dihapus');
+    }
 }

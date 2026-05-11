@@ -12,7 +12,7 @@
             <th>Kode</th>
             <th>Nama Matakuliah</th>
             <th>SKS</th>
-            <th width="200px">Aksi</th>
+            <th width="250px">Aksi</th>
         </tr>
     </thead>
     <tbody>
@@ -25,6 +25,15 @@
             <td>
                 <a href="{{ route('matakuliah.show', $mk->kode_matakuliah) }}" class="btn btn-info btn-sm">Detail</a>
                 <a href="{{ route('matakuliah.edit', $mk->kode_matakuliah) }}" class="btn btn-warning btn-sm">Edit</a>
+
+                <form action="{{ route('matakuliah.destroy', $mk->kode_matakuliah) }}" method="POST" style="display:inline;">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger btn-sm"
+                        onclick="return confirm('Yakin mau hapus data ini?')">
+                        Hapus
+                    </button>
+                </form>
             </td>
         </tr>
         @endforeach

@@ -65,4 +65,12 @@ class MahasiswaController extends Controller
 
         return redirect()->route('mahasiswa.index')->with('success', 'Data mahasiswa berhasil diupdate');
     }
+
+    public function destroy($npm)
+    {
+        $mahasiswa = Mahasiswa::where('npm', $npm)->firstOrFail();
+        $mahasiswa->delete();
+
+        return redirect()->route('mahasiswa.index')->with('success', 'Data mahasiswa berhasil dihapus');
+    }
 }
